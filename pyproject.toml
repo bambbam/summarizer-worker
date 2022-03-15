@@ -1,0 +1,33 @@
+[tool.poe.tasks]
+_black = "black ."
+_isort = "isort ."
+format = ["_black", "_isort"]
+
+_pylint = "pylint summarizer tests"
+lint = ["_pylint"]
+
+app = "uvicorn main:app --reload"
+
+[tool.poetry]
+name = "summarizer-server"
+version = "0.1.0"
+description = ""
+authors = ["JeonMinSu <minsu2530@u.sogang.ac.kr>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+fastapi = "^0.75.0"
+uvicorn = {extras = ["standard"], version = "^0.17.6"}
+
+[tool.poetry.dev-dependencies]
+poethepoet = "^0.13.1"
+pytest = "^7.1.0"
+pytest-cov = "^3.0.0"
+isort = "^5.10.1"
+coverage = "^6.3.2"
+pylint = "^2.12.2"
+black = "^22.1.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
