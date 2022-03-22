@@ -1,22 +1,33 @@
 from pydantic import BaseModel
+from typing import Any, List
 from abc import ABC, abstractmethod
 
-class BaseVideo(BaseModel, ABC):
+class BaseImage(BaseModel, ABC):
+    class Config():
+        arbitrary_types_allowed=True    
+        
     @abstractmethod
-    def read_video():
+    def extract():
         ...
+    
 
 class BaseFeature(BaseModel, ABC):
     ...
 
-class BaseVideoShortener(BaseModel, ABC):
-    @staticmethod
+class BaseVideo(BaseModel, ABC):
     @abstractmethod
-    def shorten(video: BaseVideo, feature: BaseFeature):
+    def extract_feature() -> List[BaseFeature]:
         ...
 
-class BaseVideoFeatureExtractor(BaseModel, ABC):
-    @staticmethod
     @abstractmethod
-    def extract_feature(video: BaseVideo):
+    def shorten(feature: BaseFeature):
         ...
+
+class Singleton:
+    _instance = None
+    def __new__(class_, *args, **kwargs):
+        if not isinstance(class_._instance, class_):
+            class_._instance = object.__new__(class_, *args, **kwargs)
+        return class_._instance
+
+    
