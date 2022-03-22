@@ -1,5 +1,6 @@
-from summarizer.domain.base import BaseFeature
 from typing import List
+
+from summarizer.domain.base import BaseFeature
 
 
 class Feature(BaseFeature):
