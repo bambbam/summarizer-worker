@@ -6,7 +6,6 @@ def test_video():
     images = test._read_video()
     idx = 0
     for image in images:
-        # temp = image.extract()
+        temp = image.extract()
         idx += 1
-    print(idx)
-    assert images is None
+        break

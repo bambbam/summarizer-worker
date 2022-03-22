@@ -1,17 +1,18 @@
 import os
+from typing import List
 
 import numpy as np
 from imageai.Detection import ObjectDetection
 from pydantic import BaseModel
 
-from summarizer.domain.base import BaseDetector
+from summarizer.domain.base import BaseDetector, BaseFeature, BaseImage
 from summarizer.domain.model.feature import Feature
 
 
 class Detector(BaseDetector):
     detector = ObjectDetection()
 
-    def extract(self, image, idx):
+    def extract(self, image: BaseImage, idx: int) -> List[BaseFeature]:
         detections = self.detector.detectObjectsFromImage(
             input_image=image.frame,
             input_type="array",
@@ -23,7 +24,7 @@ class Detector(BaseDetector):
             ret.append(Feature(**feature, current_frame=idx))
         return ret
 
-    def _extract_image(self, image, idx):
+    def _extract_image(self, image: BaseImage, idx: int):
         detections = self.detector.detectObjectsFromImage(
             input_image=image.frame,
             input_type="array",
