@@ -12,3 +12,6 @@ class Image():
 
     def extract(self, idx = 0):
         return self.detector.extract(self, idx)
+
+    def _extract_image(self, idx=0):
+        return self.detector._extract_image(self,idx)

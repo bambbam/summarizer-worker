@@ -1,0 +1,3 @@
+.pytest_cache
+detector_model
+*.mp4
