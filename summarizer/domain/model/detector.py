@@ -5,7 +5,7 @@ from imageai.Detection import ObjectDetection
 from pydantic import BaseModel
 
 from summarizer.domain.base import BaseDetector
-from summarizer.domain.model.Feature import Feature
+from summarizer.domain.model.feature import Feature
 
 
 class Detector(BaseDetector):
