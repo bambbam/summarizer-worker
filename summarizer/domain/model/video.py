@@ -1,20 +1,27 @@
 from operator import concat
-from typing import Any, Generator, List
+from typing import Any, Dict, Generator, List
 
 import cv2
 
 from summarizer.domain.base import BaseFeature, BaseImage, BaseVideo
 from summarizer.domain.model.feature import Feature
 from summarizer.domain.model.image import Image
+import sys
 
 
 class Video(BaseVideo):
     url: str
-    cap: Any
-
+    parameter: Dict = {}
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.cap = cv2.VideoCapture(self.url)
+        cap = cv2.VideoCapture(self.url)
+        self.parameter = {
+            "length" : int(cap.get(cv2.CAP_PROP_FRAME_COUNT)),
+            "width" : int(cap.get(cv2.CAP_PROP_FRAME_WIDTH)),
+            "height" : int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT)),
+            "fps" : cap.get(cv2.CAP_PROP_FPS),
+        }
+        cap.release()
 
     def extract_feature(self) -> List[BaseFeature]:
         ret = []
@@ -60,24 +67,21 @@ class Video(BaseVideo):
 
     def _read_video(self):
         idx = 0
+        cap = cv2.VideoCapture(self.url)
         parameter = self._get_parameter()
-        self._print_parameter(parameter)
-        while self.cap.isOpened():
-            ret, frame = self.cap.read()
+        self._print_parameter()
+        while cap.isOpened():
+            ret, frame = cap.read()
             if not ret:
                 break
-            yield (int(self.cap.get(1)), Image(frame=frame))
-        self.cap.release()
+            yield (int(cap.get(1)), Image(frame=frame))
+        cap.release()
 
     def _get_parameter(self):
-        length = int(self.cap.get(cv2.CAP_PROP_FRAME_COUNT))
-        width = int(self.cap.get(cv2.CAP_PROP_FRAME_WIDTH))
-        height = int(self.cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
-        fps = self.cap.get(cv2.CAP_PROP_FPS)
-        return {"length": length, "width": width, "height": height, "fps": fps}
+        return self.parameter
 
-    def _print_parameter(self, parameter):
-        print("length :", parameter["length"])
-        print("width :", parameter["width"])
-        print("height :", parameter["height"])
-        print("fps :", parameter["fps"])
+    def _print_parameter(self):
+        print("length :", self.parameter["length"])
+        print("width :", self.parameter["width"])
+        print("height :", self.parameter["height"])
+        print("fps :", self.parameter["fps"])
