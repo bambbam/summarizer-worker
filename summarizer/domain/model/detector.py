@@ -1,4 +1,5 @@
 import os
+from time import time
 from typing import List
 
 import numpy as np
@@ -37,10 +38,13 @@ class Detector(BaseDetector):
 class YoloV3(Detector):
     def __init__(self, **data):
         super().__init__(**data)
+        start = time()
         execution_path = os.getcwd()
         self.detector.setModelTypeAsYOLOv3()
         self.detector.setModelPath("./summarizer/detector_model/yolo.h5")
         self.detector.loadModel()
+        end = time()
+        print(end-start)
 
 
 class TinyYoloV3(Detector):
