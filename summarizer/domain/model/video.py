@@ -40,10 +40,10 @@ class Video(BaseVideo):
         to_concat_timeframe = []
         concated_image = []
         fourcc = cv2.VideoWriter_fourcc(*'DIVX')
-        out = cv2.VideoWriter("out.mp4", fourcc, fps, (parameter["width"], parameter["height"]))
+        out = cv2.VideoWriter("out.avi", fourcc, fps, (parameter["width"], parameter["height"]))
         
         for feature in video_feature:
-            ch = False
+            ch = False  
             for x in must_include_feature:
                 if x == feature.name:
                     ch = True

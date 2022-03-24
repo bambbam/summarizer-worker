@@ -3,7 +3,7 @@ from typing import Any
 import numpy as np
 
 from summarizer.domain.base import BaseDetector, BaseFeature, BaseImage
-from summarizer.domain.model.detector import YoloV3
+from summarizer.domain.model.detector import TinyYoloV3, YoloV3
 
 
 class Image(BaseImage):
