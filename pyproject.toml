@@ -27,8 +27,8 @@ fastapi = "^0.75.0"
 uvicorn = {extras = ["standard"], version = "^0.17.6"}
 imageai = "^2.1.6"
 tensorflow = "^2.4.0"
-tensorflow-gpu = "2.4.0"
-
+redis = "^4.2.0"
+dependency-injector = "^4.39.1"
 
 [tool.poetry.dev-dependencies]
 poethepoet = "^0.13.1"

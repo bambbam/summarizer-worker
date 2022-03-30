@@ -12,6 +12,8 @@ import sys
 class Video(BaseVideo):
     url: str
     parameter: Dict = {}
+    
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         cap = cv2.VideoCapture(self.url)
@@ -23,7 +25,7 @@ class Video(BaseVideo):
         }
         cap.release()
 
-    def extract_feature(self) -> List[BaseFeature]:
+    def extract_feature(self) -> List[Feature]:
         ret = []
         parameter = self._get_parameter()
         images = self._read_video()
@@ -61,9 +63,6 @@ class Video(BaseVideo):
         for image in concated_image:
             out.write(image.frame)
         out.release()
-        
-        
-        
 
     def _read_video(self):
         idx = 0
