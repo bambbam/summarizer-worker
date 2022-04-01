@@ -1,7 +1,7 @@
-# Capstone Design1 - Video Summarizer Server
+# Capstone Design1 - Video Summarizer Worker
 
 ## Stack
 
--   FAST-API
--   key-value db
--   YOLO v3
+-   fetching message queue of Redis
+-   key-value db(aws dynamodb)
+-   YOLO v3, YOLO tiny v3
