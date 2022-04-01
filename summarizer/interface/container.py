@@ -3,8 +3,6 @@ from redis import Redis
 
 from summarizer.infrastructure.redis_listener import RedisListener
 
-
-
 class Container(containers.DeclarativeContainer):
     config = providers.Configuration()
     redis = providers.Singleton(Redis, host=config.redis_host, port=config.redis_port)

@@ -1,5 +1,5 @@
 from operator import concat
-from typing import Any, Dict, Generator, List
+from typing import Any, Dict, Generator, List, Union
 
 import cv2
 
@@ -12,7 +12,7 @@ import sys
 class Video(BaseVideo):
     url: str
     parameter: Dict = {}
-    
+    algorithm: str #Union["yolov3", "tinyYolov3"]
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -73,7 +73,7 @@ class Video(BaseVideo):
             ret, frame = cap.read()
             if not ret:
                 break
-            yield (int(cap.get(1)), Image(frame=frame))
+            yield (int(cap.get(1)), Image(frame=frame, algorithm=self.algorithm))
         cap.release()
 
     def _get_parameter(self):

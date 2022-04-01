@@ -1,5 +1,4 @@
 from pydantic import BaseSettings
-from pydantic import BaseSettings
 
 from summarizer.infrastructure.redis_listener import RedisListener
 
