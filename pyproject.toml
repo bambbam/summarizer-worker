@@ -16,7 +16,7 @@ unittest = "pytest -vv -x"
 test = ["coverage", "lint"]
 
 [tool.poetry]
-name = "summarizer-server"
+name = "summarizer-worker"
 version = "0.1.0"
 description = ""
 authors = ["JeonMinSu <minsu2530@u.sogang.ac.kr>"]

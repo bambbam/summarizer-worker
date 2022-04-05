@@ -31,3 +31,11 @@ class BaseDetector(BaseModel, ABC):
     @abstractmethod
     def extract(self, image: BaseImage, idx: int) -> List[BaseFeature]:
         ...
+
+def singleton(class_):
+    instances = {}
+    def getinstance(*args, **kwargs):
+        if class_ not in instances:
+            instances[class_] = class_(*args, **kwargs)
+        return instances[class_]
+    return getinstance
