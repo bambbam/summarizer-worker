@@ -1,5 +1,5 @@
 from operator import concat
-from typing import Any, Dict, Generator, List, Union
+from typing import Any, Dict, Generator, List, Literal, Union
 
 import cv2
 
@@ -13,7 +13,7 @@ class Video(BaseVideo):
     key: str
     url: str
     parameter: Dict = {}
-    algorithm: str #Union["yolov3", "tinyYolov3"]
+    algorithm: Literal["yolov3", "tinyYolov3"]
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)

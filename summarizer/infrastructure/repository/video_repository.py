@@ -4,6 +4,7 @@ from typing import Dict, Optional
 from pydantic import BaseModel
 from summarizer.domain.base import Repository
 from summarizer.domain.model.video import Video
+from summarizer.infrastructure.now import get_now
 
 class VideoData(BaseModel):
     key: str
@@ -23,11 +24,11 @@ class VideoRepository(Repository):
         return Video(url=item.url, algorithm=self.algorithm)
         
     def put(self, data:Video, ttl=None):
-        now = datetime.now().strftime("%Y/%m/%d %H:%M:%S")
+        now = get_now()
         item = VideoData(
             key=f'{now}', #TODO change key value
             url=data.url,
-            status="start2",
+            status="start",
             start_time=now,
             end_tmie=None
         )

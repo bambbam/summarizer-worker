@@ -1,12 +1,14 @@
+import json
 from typing import List
+from decimal import Decimal
+
 
 from pydantic import BaseModel
 from summarizer.domain.base import Repository
-from summarizer.domain.model.feature import Feature
+from summarizer.domain.model.feature import VideoFeature
 
-class FeatureData(BaseModel):
-    key: str
-    list_of_fature : List[Feature]
+class FeatureData(VideoFeature):
+    ...
 
 
 
@@ -16,14 +18,13 @@ class FeatureRepository(Repository):
 
     def get(self, key):
         try:
-            item = FeatureData(**(self.table.get_item(Key=key)['Item']))
-            return [i for i in item.list_of_fature]
+            return FeatureData(**(self.table.get_item(Key={"key":key})['Item']))
         except:
             return None
     
-    def put(self, data:List[Feature], ttl=None):
+    def put(self, data:VideoFeature, ttl=None):
         try:
-            for item in data:
-                self.table.put_item(Item=item)
+            item = json.loads(json.dumps(data.dict()), parse_float=Decimal)
+            self.table.put_item(Item=item)
         except:
             return
