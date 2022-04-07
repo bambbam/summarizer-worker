@@ -39,3 +39,12 @@ def singleton(class_):
             instances[class_] = class_(*args, **kwargs)
         return instances[class_]
     return getinstance
+
+
+class Repository(ABC):
+    @abstractmethod
+    def put(self, data, ttl=None):
+        ...
+    
+    def get(self, entity_key):
+        ...

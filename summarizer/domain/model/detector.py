@@ -7,13 +7,13 @@ from imageai.Detection import ObjectDetection
 from pydantic import BaseModel
 
 from summarizer.domain.base import BaseDetector, BaseFeature, BaseImage, singleton
-from summarizer.domain.model.feature import Feature
+from summarizer.domain.model.feature import FrameFeature
 
 
 class Detector(BaseDetector):
     detector = ObjectDetection()
 
-    def extract(self, image: BaseImage, idx: int) -> List[BaseFeature]:
+    def extract(self, image: BaseImage, idx: int) -> List[FrameFeature]:
         detections = self.detector.detectObjectsFromImage(
             input_image=image.frame,
             input_type="array",
@@ -22,7 +22,7 @@ class Detector(BaseDetector):
         )
         ret = []
         for feature in detections[1]:
-            ret.append(Feature(**feature, current_frame=idx))
+            ret.append(FrameFeature(**feature, current_frame=idx))
         return ret
 
     def _extract_image(self, image: BaseImage, idx: int):

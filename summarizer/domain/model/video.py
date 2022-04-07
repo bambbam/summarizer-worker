@@ -4,12 +4,13 @@ from typing import Any, Dict, Generator, List, Union
 import cv2
 
 from summarizer.domain.base import BaseFeature, BaseImage, BaseVideo
-from summarizer.domain.model.feature import Feature
+from summarizer.domain.model.feature import FrameFeature, VideoFeature
 from summarizer.domain.model.image import Image
 import sys
 
 
 class Video(BaseVideo):
+    key: str
     url: str
     parameter: Dict = {}
     algorithm: str #Union["yolov3", "tinyYolov3"]
@@ -25,16 +26,17 @@ class Video(BaseVideo):
         }
         cap.release()
 
-    def extract_feature(self) -> List[Feature]:
-        ret = []
+    def extract_feature(self) -> VideoFeature:
+        features = []
         parameter = self._get_parameter()
         images = self._read_video()
         for idx, image in images:
             if(idx%parameter["fps"]==0):
-                ret.extend(image.extract(idx))
+                features.extend(image.extract(idx))
+        ret = VideoFeature(key=self.key, features=features)
         return ret
 
-    def shorten(self, video_feature: List[Feature], must_include_feature: List[str]):
+    def shorten(self, video_feature: VideoFeature, must_include_feature: List[str]):
         parameter = self._get_parameter()
         images = self._read_video()
         fps = parameter["fps"]
@@ -44,7 +46,7 @@ class Video(BaseVideo):
         fourcc = cv2.VideoWriter_fourcc(*'DIVX')
         out = cv2.VideoWriter("out.avi", fourcc, fps, (parameter["width"], parameter["height"]))
         
-        for feature in video_feature:
+        for feature in video_feature.features:
             ch = False  
             for x in must_include_feature:
                 if x == feature.name:
