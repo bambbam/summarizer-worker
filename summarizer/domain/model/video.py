@@ -67,10 +67,7 @@ class Video(BaseVideo):
         out.release()
 
     def _read_video(self):
-        idx = 0
         cap = cv2.VideoCapture(self.url)
-        parameter = self._get_parameter()
-        self._print_parameter()
         while cap.isOpened():
             ret, frame = cap.read()
             if not ret:
