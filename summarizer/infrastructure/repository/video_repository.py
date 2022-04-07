@@ -30,6 +30,6 @@ class VideoRepository(Repository):
             url=data.url,
             status="start",
             start_time=now,
-            end_tmie=None
+            end_time=None
         )
         self.table.put_item(Item=item.dict())
