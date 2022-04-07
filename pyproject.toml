@@ -29,6 +29,7 @@ imageai = "^2.1.6"
 tensorflow = "^2.4.0"
 redis = "^4.2.0"
 dependency-injector = "^4.39.1"
+boto3 = "^1.21.35"
 
 [tool.poetry.dev-dependencies]
 poethepoet = "^0.13.1"
