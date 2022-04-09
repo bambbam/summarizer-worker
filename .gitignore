@@ -4,3 +4,4 @@ detector_model
 *.avi
 __pycache__
 .env
+.DS_Store
