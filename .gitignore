@@ -1,0 +1,6 @@
+.pytest_cache
+detector_model
+*.mp4
+*.avi
+__pycache__
+.env
