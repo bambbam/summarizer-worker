@@ -15,13 +15,13 @@ class VideoData(BaseModel):
 
 
 class VideoRepository(Repository):
-    def __init__(self, table, algorithm):
-        self.table = table
+    def __init__(self, dynamodb, algorithm):
+        self.table = dynamodb.Table('Video')
         self.algorithm=algorithm
 
     def get(self, key):
         item = VideoData(**(self.table.get_item(Key={"key":key})['Item']))
-        return Video(url=item.url, algorithm=self.algorithm)
+        return Video(key=key,url=item.url, algorithm=self.algorithm)
         
     def put(self, data:Video, ttl=None):
         now = get_now()

@@ -8,6 +8,6 @@ class RedisListener(EventListener):
     def size(self):
         return self.redis.llen(self.key)
 
-    def fetch(self):
+    def get(self):
         return self.redis.rpop(self.key)
     

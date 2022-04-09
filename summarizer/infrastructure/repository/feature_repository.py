@@ -10,11 +10,9 @@ from summarizer.domain.model.feature import VideoFeature
 class FeatureData(VideoFeature):
     ...
 
-
-
 class FeatureRepository(Repository):
-    def __init__(self, table):
-        self.table = table
+    def __init__(self, dynamodb):
+        self.table = dynamodb.Table('Feature')
 
     def get(self, key):
         try:

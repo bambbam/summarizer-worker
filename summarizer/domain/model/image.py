@@ -1,6 +1,5 @@
-from typing import Any
-
 import numpy as np
+from typing import Any
 
 from summarizer.domain.base import BaseDetector, BaseFeature, BaseImage
 from summarizer.domain.model.detector import TinyYoloV3, YoloV3

@@ -1,12 +1,7 @@
-import os
-from time import time
 from typing import List
 
-import numpy as np
 from imageai.Detection import ObjectDetection
-from pydantic import BaseModel
-
-from summarizer.domain.base import BaseDetector, BaseFeature, BaseImage, singleton
+from summarizer.domain.base import BaseDetector, BaseImage, singleton
 from summarizer.domain.model.feature import FrameFeature
 
 
