@@ -6,7 +6,7 @@ format = ["_black", "_isort"]
 _pylint = "pylint summarizer tests"
 lint = ["_pylint"]
 
-app = "uvicorn main:app --reload"
+app = "python main.py"
 
 coverage = "pytest --cov=summarizer --capture=sys"
 coverage-report = "pytest --cov=summarizer --cov-report=xml"
@@ -27,10 +27,11 @@ fastapi = "^0.75.0"
 uvicorn = {extras = ["standard"], version = "^0.17.6"}
 imageai = "^2.1.6"
 tensorflow = "^2.4.0"
+tensorflow-gpu = "2.4.0"
 redis = "^4.2.0"
 dependency-injector = "^4.39.1"
 boto3 = "^1.21.35"
-tensorflow-gpu = "2.4.0"
+
 
 [tool.poetry.dev-dependencies]
 poethepoet = "^0.13.1"

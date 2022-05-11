@@ -32,12 +32,15 @@ class BaseDetector(BaseModel, ABC):
     def extract(self, image: BaseImage, idx: int) -> List[BaseFeature]:
         ...
 
+
 def singleton(class_):
     instances = {}
+
     def getinstance(*args, **kwargs):
         if class_ not in instances:
             instances[class_] = class_(*args, **kwargs)
         return instances[class_]
+
     return getinstance
 
 
@@ -45,6 +48,6 @@ class Repository(ABC):
     @abstractmethod
     def put(self, data, ttl=None):
         ...
-    
+
     def get(self, entity_key):
         ...

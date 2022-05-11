@@ -1,6 +1,7 @@
 from typing import List
 
 from imageai.Detection import ObjectDetection
+
 from summarizer.domain.base import BaseDetector, BaseImage, singleton
 from summarizer.domain.model.feature import FrameFeature
 
@@ -29,6 +30,7 @@ class Detector(BaseDetector):
         )
         return detections[0]
 
+
 @singleton
 class YoloV3(Detector):
     def __init__(self, **data):
@@ -37,6 +39,7 @@ class YoloV3(Detector):
         self.detector.setModelPath("./summarizer/detector_model/yolo.h5")
         self.detector.loadModel()
 
+
 @singleton
 class TinyYoloV3(Detector):
     def __init__(self, **data):
@@ -44,4 +47,3 @@ class TinyYoloV3(Detector):
         self.detector.setModelTypeAsTinyYOLOv3()
         self.detector.setModelPath("./summarizer/detector_model/tiny-yolo.h5")
         self.detector.loadModel()
-

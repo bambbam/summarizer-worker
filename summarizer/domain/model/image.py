@@ -1,14 +1,12 @@
-import numpy as np
 from typing import Any
+
+import numpy as np
 
 from summarizer.domain.base import BaseDetector, BaseFeature, BaseImage
 from summarizer.domain.model.detector import TinyYoloV3, YoloV3
 
+algorithm_map = {"yolov3": YoloV3, "tinyYolov3": TinyYoloV3}
 
-algorithm_map = {
-    "yolov3": YoloV3,
-    "tinyYolov3": TinyYoloV3
-}
 
 class Image(BaseImage):
     frame: Any

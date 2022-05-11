@@ -1,5 +1,6 @@
 from summarizer.infrastructure.event_listener import EventListener
 
+
 class RedisListener(EventListener):
     def __init__(self, key, redis):
         self.redis = redis
@@ -10,4 +11,3 @@ class RedisListener(EventListener):
 
     def get(self):
         return self.redis.rpop(self.key)
-    
