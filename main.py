@@ -5,4 +5,5 @@ def main():
     app = SinkApp(Settings())
     app.run()
 
-main()
+if __name__=="__main__":
+    main()
