@@ -9,7 +9,7 @@ class FrameFeature(BaseFeature):
     box_points: List[int]
     #feature : np.dtype
     feature : List
-    name: str
+    name: int # 0부터 #번
 
 class VideoFeature(BaseFeature):
     key: str

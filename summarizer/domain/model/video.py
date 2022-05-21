@@ -6,6 +6,7 @@ import cv2
 from summarizer.domain.base import BaseFeature, BaseImage, BaseVideo
 from summarizer.domain.model.feature import FrameFeature, VideoFeature
 from summarizer.domain.model.image import Image
+from summarizer.domain.model.face import Face_Clustering
 import sys
 
 
@@ -13,10 +14,11 @@ class Video(BaseVideo):
     key: str
     url: str
     parameter: Dict = {}
-    #faces : List #추가 
-    algorithm: Literal["yolov3", "tinyYolov3"]
+    #algorithm: Literal["yolov3", "tinyYolov3"]
+
 
     def __init__(self, **kwargs):
+        self.face_cluster : Face_Clustering()
         super().__init__(**kwargs) # 부모 메소드, 변수 등 상속, 대충 변수들 초기화 해줌
         cap = cv2.VideoCapture(self.url) # 동영상 열기
         self.parameter = {
@@ -36,6 +38,8 @@ class Video(BaseVideo):
                 features.extend(image.extract(idx))
         ret = VideoFeature(key=self.key, features=features)
         return ret
+    def cluster(self):
+        return self.face_cluster.cluster(self) # 이렇게 하면 되나?
 
     def shorten(self, video_feature: VideoFeature, must_include_feature: List[str]):
         parameter = self._get_parameter()

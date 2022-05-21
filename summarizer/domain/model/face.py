@@ -4,7 +4,7 @@ import numpy as np
 from sklearn.cluster import DBSCAN #clustering에 필요 
 
 from summarizer.domain.base import BaseImage
-from summarizer.domain.model.feature import FrameFeature
+from summarizer.domain.model.feature import FrameFeature, VideoFeature
 
 class Face():
   def __init__(self, frame_id, box, feature, name = None):
@@ -15,7 +15,7 @@ class Face():
 
 class Face_Clustering():
     def __init__(self):
-        self.faces = []
+        self.faces = VideoFeature
         self.unique_cnt_dict = {}
         self.person_class = 0
 
@@ -35,13 +35,14 @@ class Face_Clustering():
             faces_in_frame.append(face)
         # self.drawBox(frame, face)
 
-        self.faces.extend(faces_in_frame) #extend는 iterable한것들을 append
+        self.faces.features.extend(faces_in_frame) #extend는 iterable한것들을 append
+        
         return faces_in_frame
 
     def cluster(self):
-        if len(self.faces) == 0:
+        if len(self.faces.features) == 0:
             return
-        features = [face.feature for face in self.faces]
+        features = [face.feature for face in self.faces.features]
 
         cm = DBSCAN(metric="euclidean")
         cm.fit(features)
@@ -54,8 +55,9 @@ class Face_Clustering():
         for label_id in label_ids:
             index = np.where(cm.labels_ == label_id)[0]
             for i in index:
-                frame_id = self.faces[i].frame_id
-                box = self.faces[i].box
-                feature = self.faces[i].feature
+                frame_id = self.faces.features[i].frame_id
+                box = self.faces.features[i].box
+                feature = self.faces.features[i].feature
+                self.faces.features[i].name = label_id
                 
         print('clustering done')
