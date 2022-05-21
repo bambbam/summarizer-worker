@@ -13,11 +13,12 @@ class Video(BaseVideo):
     key: str
     url: str
     parameter: Dict = {}
+    #faces : List #추가 
     algorithm: Literal["yolov3", "tinyYolov3"]
 
     def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        cap = cv2.VideoCapture(self.url)
+        super().__init__(**kwargs) # 부모 메소드, 변수 등 상속, 대충 변수들 초기화 해줌
+        cap = cv2.VideoCapture(self.url) # 동영상 열기
         self.parameter = {
             "length" : int(cap.get(cv2.CAP_PROP_FRAME_COUNT)),
             "width" : int(cap.get(cv2.CAP_PROP_FRAME_WIDTH)),
@@ -29,7 +30,7 @@ class Video(BaseVideo):
     def extract_feature(self) -> VideoFeature:
         features = []
         parameter = self._get_parameter()
-        images = self._read_video()
+        images = self._read_video() 
         for idx, image in images:
             if(idx%parameter["fps"]==0):
                 features.extend(image.extract(idx))
@@ -48,31 +49,36 @@ class Video(BaseVideo):
         
         for feature in video_feature.features:
             ch = False  
-            for x in must_include_feature:
-                if x == feature.name:
+            for x in must_include_feature: #??
+                if x == feature.name: # 특정 인물 
                     ch = True
-                    break
+                    break #흠
             if ch:
-                to_concat_timeframe.append(feature.current_frame)
+                to_concat_timeframe.append(feature.current_frame) # 프레임 번호 저장
         
         for idx, image in images:
             one_sec_images.append(image)
             if(idx%fps == 0):
-                if(idx in to_concat_timeframe):
-                    concated_image.extend(one_sec_images)
+                if(idx in to_concat_timeframe): # 사람이 있는 프레임 번호라면 
+                    concated_image.extend(one_sec_images) # 대충 기준 시간마다 이미지를 출력하고 다시 초기화
                 one_sec_images = []
 
         for image in concated_image:
             out.write(image.frame)
         out.release()
 
-    def _read_video(self):
+    def _read_video(self): # 한 프레임씩 읽기 
         cap = cv2.VideoCapture(self.url)
+        if not cap.isOpened():
+            print("video not opened!")
+        frame_id = 0
         while cap.isOpened():
             ret, frame = cap.read()
             if not ret:
                 break
-            yield (int(cap.get(1)), Image(frame=frame, algorithm=self.algorithm))
+            #yield (int(cap.get(1)), Image(frame=frame, algorithm=self.algorithm))
+            yield (frame_id, Image(frame=frame, frame_id=frame_id))
+            frame_id += 1
         cap.release()
 
     def _get_parameter(self):
