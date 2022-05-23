@@ -26,5 +26,6 @@ class FeatureRepository(Repository):
         try:
             item = json.loads(json.dumps(data.dict()), parse_float=Decimal)
             self.table.put_item(Item=item)
+            return True
         except:
-            return
+            return False

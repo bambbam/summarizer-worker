@@ -15,9 +15,20 @@ def extract_feature(
     feature_repo: FeatureRepository,
     video_repo: VideoRepository,
 ):
-    video = video_repo.get(command.key)
-    video_feature = video.extract_feature()
-    feature_repo.put(video_feature)
+    try:
+        video = video_repo.get(command.key)
+        if video is None:
+            return
+        video_repo.update_status(command.key, 'start')
+        ## TODO add logging
+        video_feature = video.extract_feature()
+        result = feature_repo.put(video_feature)
+        video_repo.update_status(command.key, 'end')
+        if not result :
+            ...
+    except:
+        video_repo.update_status(command.key, 'error')
+    ### TODO ADD logging
 
 
 COMMAND_HANDLER = {"ExtractFeature": (ExtractFeature, extract_feature)}

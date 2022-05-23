@@ -4,10 +4,10 @@ from summarizer.domain.base import BaseFeature
 
 
 class FrameFeature(BaseFeature):
-    current_frame: int
     name: str
-    percentage_probability: float
+    current_frame: int
     box_points: List[int]
+    # percentage_probability: float
 
 
 class VideoFeature(BaseFeature):
