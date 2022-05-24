@@ -1,15 +1,14 @@
+from typing import Any
+import cv2
+
 import numpy as np
-from typing import Any, List
 
 from summarizer.domain.base import BaseDetector, BaseFeature, BaseImage
 from summarizer.domain.model.detector import TinyYoloV3, YoloV3
 from summarizer.domain.model.face import Face, Face_Clustering
 
+algorithm_map = {"yolov3": YoloV3, "tinyYolov3": TinyYoloV3}
 
-algorithm_map = {
-    "yolov3": YoloV3,
-    "tinyYolov3": TinyYoloV3
-}
 
 class Image(BaseImage):
     frame: Any
@@ -30,3 +29,7 @@ class Image(BaseImage):
 
     def _extract_image(self, idx=0):
         return self.detector._extract_image(self, idx)
+
+    @staticmethod
+    def convert_file_obj(img):
+        return cv2.imencode('.jpg', img)[1].tostring()

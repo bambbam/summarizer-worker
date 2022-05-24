@@ -1,3 +1,4 @@
+import sys
 from operator import concat
 from typing import Any, Dict, Generator, List, Literal, Union
 
@@ -8,6 +9,7 @@ from summarizer.domain.model.feature import FrameFeature, VideoFeature
 from summarizer.domain.model.image import Image
 from summarizer.domain.model.face import Face_Clustering
 import sys
+
 
 
 class Video(BaseVideo):
@@ -22,22 +24,21 @@ class Video(BaseVideo):
         super().__init__(**kwargs) # 부모 메소드, 변수 등 상속, 대충 변수들 초기화 해줌
         cap = cv2.VideoCapture(self.url) # 동영상 열기
         self.parameter = {
-            "length" : int(cap.get(cv2.CAP_PROP_FRAME_COUNT)),
-            "width" : int(cap.get(cv2.CAP_PROP_FRAME_WIDTH)),
-            "height" : int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT)),
-            "fps" : cap.get(cv2.CAP_PROP_FPS),
+            "length": int(cap.get(cv2.CAP_PROP_FRAME_COUNT)),
+            "width": int(cap.get(cv2.CAP_PROP_FRAME_WIDTH)),
+            "height": int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT)),
+            "fps": cap.get(cv2.CAP_PROP_FPS),
         }
         cap.release()
 
     def extract_feature(self) -> VideoFeature:
         features = []
         parameter = self._get_parameter()
-        images = self._read_video() 
-        for idx, image in images:
-            if(idx%parameter["fps"]==0):
+        for idx, image in self._read_video():
+            if idx % parameter["fps"] == 0:
                 features.extend(image.extract(idx))
-        ret = VideoFeature(key=self.key, features=features)
-        return ret
+        return VideoFeature(key=self.key, features=features)
+      
     def cluster(self):
         return self.face_cluster.cluster(self) # 이렇게 하면 되나?
 
@@ -48,9 +49,11 @@ class Video(BaseVideo):
         one_sec_images = []
         to_concat_timeframe = []
         concated_image = []
-        fourcc = cv2.VideoWriter_fourcc(*'DIVX')
-        out = cv2.VideoWriter("out.avi", fourcc, fps, (parameter["width"], parameter["height"]))
-        
+        fourcc = cv2.VideoWriter_fourcc(*"DIVX")
+        out = cv2.VideoWriter(
+            "out.avi", fourcc, fps, (parameter["width"], parameter["height"])
+        )
+
         for feature in video_feature.features:
             ch = False  
             for x in must_include_feature: #??
@@ -71,7 +74,18 @@ class Video(BaseVideo):
             out.write(image.frame)
         out.release()
 
-    def _read_video(self): # 한 프레임씩 읽기 
+    def extract_box_point(self, features:List[FrameFeature]):
+        ret = {}
+        cap = cv2.VideoCapture(self.url)
+        for name, feature in features.items():
+            cap.set(1,int(feature.current_frame))
+            _, frame = cap.read()
+            x,y,w,h = feature.box_points
+            frame = frame[y:y + h, x:x + w]
+            ret[name] = frame
+        return ret
+
+    def _read_video(self):
         cap = cv2.VideoCapture(self.url)
         if not cap.isOpened():
             print("video not opened!")
