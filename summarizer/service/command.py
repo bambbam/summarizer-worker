@@ -43,6 +43,7 @@ def extract_feature(
                 f"img/{video_data.key}",
                 name
             )
+        ## TODO 잘못짬~~
         result = feature_repo.put(video_feature)
         if not result:
             print("error!")
