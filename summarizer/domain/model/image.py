@@ -1,4 +1,5 @@
 from typing import Any
+import cv2
 
 import numpy as np
 
@@ -21,3 +22,7 @@ class Image(BaseImage):
 
     def _extract_image(self, idx=0):
         return self.detector._extract_image(self, idx)
+
+    @staticmethod
+    def convert_file_obj(img):
+        return cv2.imencode('.jpg', img)[1].tostring()

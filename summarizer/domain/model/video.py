@@ -66,6 +66,17 @@ class Video(BaseVideo):
             out.write(image.frame)
         out.release()
 
+    def extract_box_point(self, features:List[FrameFeature]):
+        ret = {}
+        cap = cv2.VideoCapture(self.url)
+        for name, feature in features.items():
+            cap.set(1,int(feature.current_frame))
+            _, frame = cap.read()
+            x,y,w,h = feature.box_points
+            frame = frame[y:y + h, x:x + w]
+            ret[name] = frame
+        return ret
+
     def _read_video(self):
         cap = cv2.VideoCapture(self.url)
         while cap.isOpened():

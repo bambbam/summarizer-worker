@@ -18,9 +18,9 @@ class FeatureRepository(Repository):
 
     def get(self, key):
         try:
-            return FeatureData(**(self.table.get_item(Key={"key": key})["Item"]))
+            return VideoFeature(**(self.table.get_item(Key={"key": key})["Item"]))
         except:
-            return None
+            return None        
 
     def put(self, data: VideoFeature, ttl=None):
         try:

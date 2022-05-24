@@ -41,14 +41,9 @@ class VideoDataRepository(Repository):
     def put(self, data: VideoData, ttl=None):
         now = get_now()
         try:
-            item = VideoData(
-                key=data.key,
-                user_name=data.user_name,
-                status="end",
-                start_time=data.start_time,
-                end_time=now(),
-            )
-            self.table.put_item(Item=item.dict())
+            data.status="end"
+            data.end_time = now
+            self.table.put_item(Item=data.dict())
             return True
         except:
             return False
