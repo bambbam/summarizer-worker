@@ -13,9 +13,6 @@ class VideoFeature(BaseFeature):
     features: List[FrameFeature]
     representing_features: Dict[str,FrameFeature] = {}
 
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-
     def get_best_feature(self):
         ret = {}
         for feature in self.features:

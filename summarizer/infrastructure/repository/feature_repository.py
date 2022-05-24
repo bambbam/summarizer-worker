@@ -23,9 +23,7 @@ class FeatureRepository(Repository):
             return None        
 
     def put(self, data: VideoFeature, ttl=None):
-        try:
             item = json.loads(json.dumps(data.dict()), parse_float=Decimal)
             self.table.put_item(Item=item)
             return True
-        except:
-            return False
+        
