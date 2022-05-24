@@ -1,3 +1,4 @@
+import sys
 from operator import concat
 from typing import Any, Dict, Generator, List, Literal, Union
 
@@ -6,7 +7,6 @@ import cv2
 from summarizer.domain.base import BaseFeature, BaseImage, BaseVideo
 from summarizer.domain.model.feature import FrameFeature, VideoFeature
 from summarizer.domain.model.image import Image
-import sys
 
 
 class Video(BaseVideo):
@@ -19,22 +19,20 @@ class Video(BaseVideo):
         super().__init__(**kwargs)
         cap = cv2.VideoCapture(self.url)
         self.parameter = {
-            "length" : int(cap.get(cv2.CAP_PROP_FRAME_COUNT)),
-            "width" : int(cap.get(cv2.CAP_PROP_FRAME_WIDTH)),
-            "height" : int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT)),
-            "fps" : cap.get(cv2.CAP_PROP_FPS),
+            "length": int(cap.get(cv2.CAP_PROP_FRAME_COUNT)),
+            "width": int(cap.get(cv2.CAP_PROP_FRAME_WIDTH)),
+            "height": int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT)),
+            "fps": cap.get(cv2.CAP_PROP_FPS),
         }
         cap.release()
 
     def extract_feature(self) -> VideoFeature:
         features = []
         parameter = self._get_parameter()
-        images = self._read_video()
-        for idx, image in images:
-            if(idx%parameter["fps"]==0):
+        for idx, image in self._read_video():
+            if idx % parameter["fps"] == 0:
                 features.extend(image.extract(idx))
-        ret = VideoFeature(key=self.key, features=features)
-        return ret
+        return VideoFeature(key=self.key, features=features)
 
     def shorten(self, video_feature: VideoFeature, must_include_feature: List[str]):
         parameter = self._get_parameter()
@@ -43,28 +41,41 @@ class Video(BaseVideo):
         one_sec_images = []
         to_concat_timeframe = []
         concated_image = []
-        fourcc = cv2.VideoWriter_fourcc(*'DIVX')
-        out = cv2.VideoWriter("out.avi", fourcc, fps, (parameter["width"], parameter["height"]))
-        
+        fourcc = cv2.VideoWriter_fourcc(*"DIVX")
+        out = cv2.VideoWriter(
+            "out.avi", fourcc, fps, (parameter["width"], parameter["height"])
+        )
+
         for feature in video_feature.features:
-            ch = False  
+            ch = False
             for x in must_include_feature:
                 if x == feature.name:
                     ch = True
                     break
             if ch:
                 to_concat_timeframe.append(feature.current_frame)
-        
+
         for idx, image in images:
             one_sec_images.append(image)
-            if(idx%fps == 0):
-                if(idx in to_concat_timeframe):
+            if idx % fps == 0:
+                if idx in to_concat_timeframe:
                     concated_image.extend(one_sec_images)
                 one_sec_images = []
 
         for image in concated_image:
             out.write(image.frame)
         out.release()
+
+    def extract_box_point(self, features:List[FrameFeature]):
+        ret = {}
+        cap = cv2.VideoCapture(self.url)
+        for name, feature in features.items():
+            cap.set(1,int(feature.current_frame))
+            _, frame = cap.read()
+            x,y,w,h = feature.box_points
+            frame = frame[y:y + h, x:x + w]
+            ret[name] = frame
+        return ret
 
     def _read_video(self):
         cap = cv2.VideoCapture(self.url)
