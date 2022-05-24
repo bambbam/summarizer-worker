@@ -4,7 +4,7 @@ from redis import Redis
 
 from summarizer.infrastructure.redis_listener import RedisListener
 from summarizer.infrastructure.repository import (FeatureRepository,
-                                                  VideoRepository)
+                                                  VideoDataRepository)
 
 
 class Container(containers.DeclarativeContainer):
@@ -16,7 +16,11 @@ class Container(containers.DeclarativeContainer):
     dynamodb = providers.Singleton(
         boto3.resource, "dynamodb", endpoint_url=config.dynamodb_url
     )
+    s3 = providers.Singleton(
+        boto3.client, "s3", aws_access_key_id = config.aws_access_key_id, aws_secret_access_key = config.aws_secret_access_key
+    )
+    
     feature_repository = providers.Singleton(FeatureRepository, dynamodb)
     video_repository = providers.Singleton(
-        VideoRepository, dynamodb, algorithm=config.detector_model
+        VideoDataRepository, dynamodb, algorithm=config.detector_model
     )
