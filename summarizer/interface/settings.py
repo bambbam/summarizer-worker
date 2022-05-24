@@ -11,5 +11,7 @@ class Settings(BaseSettings):
     detector_model: Literal["yolov3", "tinyYolov3"]
     dynamodb_url: str
 
+    aws_access_key_id: str
+    aws_secret_access_key: str
     class Config:
         env_file = ".env"
