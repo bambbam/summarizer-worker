@@ -9,12 +9,17 @@ from summarizer.domain.base import BaseImage, BaseVideo
 from summarizer.domain.model.feature import FrameFeature, VideoFeature
 from summarizer.domain.model.image import Image
 from summarizer.domain.model.video import Video
+
+def dist(face1, face2):
+    return np.linalg.norm(face1-face2)
+
+
 class FaceClustering():
     def extract_feature(self, video:Video):
         features = []
         faces = []     
         parameter = video._get_parameter()
-        num_modular = int(parameter["fps"])
+        num_modular = 3
         for idx, img in video._read_video():
             if idx % num_modular == 0:
                 print(idx)
@@ -57,7 +62,7 @@ class FaceClustering():
         if len(faces) == 0:
             return
 
-        cm = DBSCAN(eps=0.2)
+        cm = DBSCAN(eps=1, min_samples=15, metric=dist)
         cm.fit(features)
         # clustering 완료
 
