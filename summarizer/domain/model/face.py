@@ -62,7 +62,7 @@ class FaceClustering():
         if len(faces) == 0:
             return
 
-        cm = DBSCAN(eps=1, min_samples=15, metric=dist)
+        cm = DBSCAN(eps=0.3, min_samples=15, metric=dist)
         cm.fit(features)
         # clustering 완료
 

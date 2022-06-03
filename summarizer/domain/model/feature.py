@@ -19,3 +19,4 @@ class VideoFeature(BaseFeature):
             if feature.name not in ret:
                 ret[feature.name] = feature
         return ret
+

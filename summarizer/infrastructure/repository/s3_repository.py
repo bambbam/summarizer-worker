@@ -18,3 +18,10 @@ class S3Repository():
             return True
         except:
             return False
+
+    def upload_video(self, file_path, prefix, key):
+        try:
+            self.s3.upload_file(Bucket= self.bucket, Key=prefix+'/'+key, Filename=file_path)
+            return True
+        except:
+            return False

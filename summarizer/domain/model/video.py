@@ -1,3 +1,4 @@
+import os
 from typing import  Dict, List
 
 import cv2
@@ -32,8 +33,10 @@ class Video(BaseVideo):
         to_concat_timeframe = []
         concated_image = []
         fourcc = cv2.VideoWriter_fourcc(*"mp4v")
+        label = f"./tmp_dir/tmp_{self.key}"
+        saved_label = f"./tmp_dir/{self.key}"
         out = cv2.VideoWriter(
-            f"{self.key}", fourcc, fps, (parameter["width"], parameter["height"])
+            label, fourcc, fps, (parameter["width"], parameter["height"])
         )
         for feature in video_feature.features:
             ch = False  
@@ -54,6 +57,9 @@ class Video(BaseVideo):
         for image in concated_image:
             out.write(image.frame)
         out.release()
+        os.system(f"ffmpeg -i {label} -vcodec libx264 {saved_label}")
+
+        return (label, saved_label)
 
     def extract_box_point(self, features:Dict[str,FrameFeature]):
         ret = {}
