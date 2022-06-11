@@ -1,4 +1,5 @@
-from typing import Literal
+import os
+from typing import List, Literal
 
 import boto3
 import numpy as np
@@ -51,6 +52,40 @@ def extract_feature(
         video_repo.put(video_data)
         
 
+class ShortenVideo(Command):
+    type: Literal["ShortenVideo"]
+    key: str
+    must_include_feature: List[str]
+    
+def shorten_video(
+    command: ShortenVideo,
+    feature_repo: FeatureRepository,
+    video_repo: VideoDataRepository,
+    s3_repo: S3Repository,
+):
+    feature = feature_repo.get(command.key)
+    if feature is None:
+        return
+    video_data = video_repo.get(command.key)
+    video = Video(
+            key=command.key,
+            url=s3_repo.get_s3_url('video', command.key),
+        )
+    tmp_s3_video_label, s3_video_label = video.shorten(
+        video_feature=feature,
+        must_include_feature=command.must_include_feature
+    )
+    s3_repo.upload_video(
+                s3_video_label,
+                f"shorten_video",
+                command.key,
+            )    
+    
+    video_repo.put(video_data, "end")
+    os.remove(tmp_s3_video_label)
+    os.remove(s3_video_label)
 
-
-COMMAND_HANDLER = {"ExtractFeature": (ExtractFeature, extract_feature)}
+COMMAND_HANDLER = {
+    "ExtractFeature": (ExtractFeature, extract_feature), 
+    "ShortenVideo":(ShortenVideo, shorten_video)
+}

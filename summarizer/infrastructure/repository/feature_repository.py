@@ -1,5 +1,6 @@
 import json
 from decimal import Decimal
+from turtle import st
 from typing import List
 
 from pydantic import BaseModel
@@ -27,3 +28,11 @@ class FeatureRepository(Repository):
             self.table.put_item(Item=item)
             return True
         
+
+
+class ShortedVideoRepository(Repository):
+    def __init__(self, dynamodb):
+        self.table = dynamodb.Table("ShortedVideo")
+    
+    def get(self,key):
+        ...

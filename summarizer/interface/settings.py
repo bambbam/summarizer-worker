@@ -9,7 +9,10 @@ class Settings(BaseSettings):
     redis_key: str
 
     detector_model: Literal["yolov3", "tinyYolov3"]
+    
     dynamodb_url: str
+    dynamodb_aws_access_key_id: str
+    dynamodb_aws_secret_access_key: str
 
     aws_access_key_id: str
     aws_secret_access_key: str

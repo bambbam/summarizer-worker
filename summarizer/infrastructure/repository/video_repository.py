@@ -38,7 +38,7 @@ class VideoDataRepository(Repository):
         except:
             return False
             
-    def put(self, data: VideoData, ttl=None):
+    def put(self, data: VideoData, status="end", ttl=None):
         now = get_now()
         try:
             data.status="end"

@@ -15,7 +15,7 @@ class Container(containers.DeclarativeContainer):
     event_listener = providers.Factory(RedisListener, redis=redis, key=config.redis_key)
 
     dynamodb = providers.Singleton(
-        boto3.resource, "dynamodb", endpoint_url=config.dynamodb_url
+        boto3.resource, "dynamodb", aws_access_key_id=config.dynamodb_aws_access_key_id,  aws_secret_access_key=config.dynamodb_aws_secret_access_key
     )
     s3 = providers.Singleton(
         boto3.client, "s3", aws_access_key_id = config.aws_access_key_id, aws_secret_access_key = config.aws_secret_access_key
