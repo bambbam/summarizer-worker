@@ -6,6 +6,7 @@ from pydantic import BaseModel
 
 from summarizer.domain.base import Repository
 from summarizer.domain.model.video import Video
+from summarizer.exception import DatabaseException
 from summarizer.infrastructure.now import get_now
 
 
@@ -25,18 +26,17 @@ class VideoDataRepository(Repository):
     def get(self, key):
         try:
             item = VideoData(**(self.table.get_item(Key={"key": key})["Item"]))
+            return item
         except:
-            item = None
-        return item
+            raise DatabaseException(f"{self.__class__} get method doesn't work")
 
     def update_status(self, key: str, status: Literal['start', 'end']):
         try:
             item = VideoData(**(self.table.get_item(Key={"key": key})["Item"]))
             item.status = status
             self.table.put_item(Item=item.dict())
-            return True
         except:
-            return False
+            raise DatabaseException(f"{self.__class__} update_status method doesn't work")
             
     def put(self, data: VideoData, status="end", ttl=None):
         now = get_now()
@@ -44,6 +44,5 @@ class VideoDataRepository(Repository):
             data.status="end"
             data.end_time = now
             self.table.put_item(Item=data.dict())
-            return True
         except:
-            return False
+            raise DatabaseException(f"{self.__class__} put method doesn't work")

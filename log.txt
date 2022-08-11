@@ -1,0 +1,217 @@
+DEBUG:botocore.hooks:Changing event name from creating-client-class.iot-data to creating-client-class.iot-data-plane
+DEBUG:botocore.hooks:Changing event name from before-call.apigateway to before-call.api-gateway
+DEBUG:botocore.hooks:Changing event name from request-created.machinelearning.Predict to request-created.machine-learning.Predict
+DEBUG:botocore.hooks:Changing event name from before-parameter-build.autoscaling.CreateLaunchConfiguration to before-parameter-build.auto-scaling.CreateLaunchConfiguration
+DEBUG:botocore.hooks:Changing event name from before-parameter-build.route53 to before-parameter-build.route-53
+DEBUG:botocore.hooks:Changing event name from request-created.cloudsearchdomain.Search to request-created.cloudsearch-domain.Search
+DEBUG:botocore.hooks:Changing event name from docs.*.autoscaling.CreateLaunchConfiguration.complete-section to docs.*.auto-scaling.CreateLaunchConfiguration.complete-section
+DEBUG:botocore.hooks:Changing event name from before-parameter-build.logs.CreateExportTask to before-parameter-build.cloudwatch-logs.CreateExportTask
+DEBUG:botocore.hooks:Changing event name from docs.*.logs.CreateExportTask.complete-section to docs.*.cloudwatch-logs.CreateExportTask.complete-section
+DEBUG:botocore.hooks:Changing event name from before-parameter-build.cloudsearchdomain.Search to before-parameter-build.cloudsearch-domain.Search
+DEBUG:botocore.hooks:Changing event name from docs.*.cloudsearchdomain.Search.complete-section to docs.*.cloudsearch-domain.Search.complete-section
+DEBUG:botocore.loaders:Loading JSON file: /home/minsu/anaconda3/envs/summarizer/lib/python3.8/site-packages/boto3/data/dynamodb/2012-08-10/resources-1.json
+DEBUG:botocore.loaders:Loading JSON file: /home/minsu/anaconda3/envs/summarizer/lib/python3.8/site-packages/botocore/data/endpoints.json
+DEBUG:botocore.loaders:Loading JSON file: /home/minsu/anaconda3/envs/summarizer/lib/python3.8/site-packages/botocore/data/sdk-default-configuration.json
+DEBUG:botocore.hooks:Event choose-service-name: calling handler <function handle_service_name_alias at 0x7f44b8e54dc0>
+DEBUG:botocore.loaders:Loading JSON file: /home/minsu/anaconda3/envs/summarizer/lib/python3.8/site-packages/botocore/data/dynamodb/2012-08-10/service-2.json
+DEBUG:botocore.hooks:Event creating-client-class.dynamodb: calling handler <function add_generate_presigned_url at 0x7f44b8ed9b80>
+DEBUG:botocore.endpoint:Setting dynamodb timeout as (60, 60)
+DEBUG:botocore.loaders:Loading JSON file: /home/minsu/anaconda3/envs/summarizer/lib/python3.8/site-packages/botocore/data/_retry.json
+DEBUG:botocore.client:Registering retry handlers for service: dynamodb
+DEBUG:boto3.resources.factory:Loading dynamodb:dynamodb
+DEBUG:botocore.hooks:Event creating-resource-class.dynamodb.ServiceResource: calling handler <function lazy_call.<locals>._handler at 0x7f43c3588310>
+DEBUG:boto3.resources.factory:Loading dynamodb:Table
+DEBUG:botocore.hooks:Event creating-resource-class.dynamodb.Table: calling handler <function lazy_call.<locals>._handler at 0x7f43c35883a0>
+DEBUG:botocore.hooks:Event creating-resource-class.dynamodb.Table: calling handler <function lazy_call.<locals>._handler at 0x7f43c3588310>
+DEBUG:boto3.resources.factory:Loading dynamodb:Table
+DEBUG:botocore.hooks:Event creating-resource-class.dynamodb.Table: calling handler <function lazy_call.<locals>._handler at 0x7f43c35883a0>
+DEBUG:botocore.hooks:Event creating-resource-class.dynamodb.Table: calling handler <function lazy_call.<locals>._handler at 0x7f43c3588310>
+DEBUG:botocore.hooks:Event choose-service-name: calling handler <function handle_service_name_alias at 0x7f44b8e54dc0>
+DEBUG:botocore.loaders:Loading JSON file: /home/minsu/anaconda3/envs/summarizer/lib/python3.8/site-packages/botocore/data/s3/2006-03-01/service-2.json
+DEBUG:botocore.hooks:Event creating-client-class.s3: calling handler <function add_generate_presigned_post at 0x7f44b8ed9dc0>
+DEBUG:botocore.hooks:Event creating-client-class.s3: calling handler <function lazy_call.<locals>._handler at 0x7f43c35cc310>
+DEBUG:botocore.hooks:Event creating-client-class.s3: calling handler <function add_generate_presigned_url at 0x7f44b8ed9b80>
+DEBUG:botocore.endpoint:Setting s3 timeout as (60, 60)
+DEBUG:botocore.client:Registering retry handlers for service: s3
+DEBUG:extract_feature:function extract_feature called with args ExtractFeature(type='ExtractFeature', key='492774aa-d621-454a-8ada-f4e86d6f739d.mp4'), feature_repo=<summarizer.infrastructure.repository.feature_repository.FeatureRepository object at 0x7f43c2fba7f0>, video_repo=<summarizer.infrastructure.repository.video_repository.VideoDataRepository object at 0x7f43c35b1ca0>, s3_repo=<summarizer.infrastructure.repository.s3_repository.S3Repository object at 0x7f43c2fd0100>
+DEBUG:boto3.resources.action:Calling dynamodb:get_item with {'TableName': 'Video', 'Key': {'key': '492774aa-d621-454a-8ada-f4e86d6f739d.mp4'}}
+DEBUG:botocore.hooks:Event provide-client-params.dynamodb.GetItem: calling handler <function copy_dynamodb_params at 0x7f43c2fb9430>
+DEBUG:botocore.hooks:Event before-parameter-build.dynamodb.GetItem: calling handler <bound method TransformationInjector.inject_condition_expressions of <boto3.dynamodb.transform.TransformationInjector object at 0x7f43c301e1f0>>
+DEBUG:botocore.hooks:Event before-parameter-build.dynamodb.GetItem: calling handler <bound method TransformationInjector.inject_attribute_value_input of <boto3.dynamodb.transform.TransformationInjector object at 0x7f43c301e1f0>>
+DEBUG:botocore.hooks:Event before-parameter-build.dynamodb.GetItem: calling handler <function generate_idempotent_uuid at 0x7f44b8dec550>
+DEBUG:botocore.hooks:Event before-parameter-build.dynamodb.GetItem: calling handler <function block_endpoint_discovery_required_operations at 0x7f44b8ed8f70>
+DEBUG:botocore.hooks:Event before-call.dynamodb.GetItem: calling handler <function add_recursion_detection_header at 0x7f44b8dec1f0>
+DEBUG:botocore.hooks:Event before-call.dynamodb.GetItem: calling handler <function inject_api_version_header_if_needed at 0x7f44b8df1dc0>
+DEBUG:botocore.endpoint:Making request for OperationModel(name=GetItem) with params: {'url_path': '/', 'query_string': '', 'method': 'POST', 'headers': {'X-Amz-Target': 'DynamoDB_20120810.GetItem', 'Content-Type': 'application/x-amz-json-1.0', 'User-Agent': 'Boto3/1.23.6 Python/3.8.10 Linux/5.15.0-43-generic Botocore/1.26.6 Resource'}, 'body': b'{"TableName": "Video", "Key": {"key": {"S": "492774aa-d621-454a-8ada-f4e86d6f739d.mp4"}}}', 'url': 'https://dynamodb.ap-northeast-2.amazonaws.com/', 'context': {'client_region': 'ap-northeast-2', 'client_config': <botocore.config.Config object at 0x7f43c305c700>, 'has_streaming_input': False, 'auth_type': None}}
+DEBUG:botocore.hooks:Event request-created.dynamodb.GetItem: calling handler <bound method RequestSigner.handler of <botocore.signers.RequestSigner object at 0x7f43c305c5e0>>
+DEBUG:botocore.hooks:Event choose-signer.dynamodb.GetItem: calling handler <function set_operation_specific_signer at 0x7f44b8dec430>
+DEBUG:botocore.auth:Calculating signature using v4 auth.
+DEBUG:botocore.auth:CanonicalRequest:
+POST
+/
+
+content-type:application/x-amz-json-1.0
+host:dynamodb.ap-northeast-2.amazonaws.com
+x-amz-date:20220811T132804Z
+x-amz-target:DynamoDB_20120810.GetItem
+
+content-type;host;x-amz-date;x-amz-target
+11cc32177612962bd2b1bc350b90407c595f14bd5ad5c1ff5998c90e89d3b658
+DEBUG:botocore.auth:StringToSign:
+AWS4-HMAC-SHA256
+20220811T132804Z
+20220811/ap-northeast-2/dynamodb/aws4_request
+3376f5c8ecc84d310f8b91a7e54ac1d5b6cfa690e2ae308422d6ea60972a417b
+DEBUG:botocore.auth:Signature:
+6dad359ae2e9d2f83460e18441cade87fe6ad6af3ac21edd0c235b4346db84bf
+DEBUG:botocore.hooks:Event request-created.dynamodb.GetItem: calling handler <function add_retry_headers at 0x7f44b8df24c0>
+DEBUG:botocore.endpoint:Sending http request: <AWSPreparedRequest stream_output=False, method=POST, url=https://dynamodb.ap-northeast-2.amazonaws.com/, headers={'X-Amz-Target': b'DynamoDB_20120810.GetItem', 'Content-Type': b'application/x-amz-json-1.0', 'User-Agent': b'Boto3/1.23.6 Python/3.8.10 Linux/5.15.0-43-generic Botocore/1.26.6 Resource', 'X-Amz-Date': b'20220811T132804Z', 'Authorization': b'AWS4-HMAC-SHA256 Credential=AKIAXYKMGOSG4IHJJUVD/20220811/ap-northeast-2/dynamodb/aws4_request, SignedHeaders=content-type;host;x-amz-date;x-amz-target, Signature=6dad359ae2e9d2f83460e18441cade87fe6ad6af3ac21edd0c235b4346db84bf', 'amz-sdk-invocation-id': b'af2f654a-ec7f-4f2f-a8e3-70c1c081e03e', 'amz-sdk-request': b'attempt=1', 'Content-Length': '89'}>
+DEBUG:botocore.httpsession:Certificate path: /home/minsu/anaconda3/envs/summarizer/lib/python3.8/site-packages/certifi/cacert.pem
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): dynamodb.ap-northeast-2.amazonaws.com:443
+DEBUG:urllib3.connectionpool:https://dynamodb.ap-northeast-2.amazonaws.com:443 "POST / HTTP/1.1" 400 112
+DEBUG:botocore.parsers:Response headers: {'Server': 'Server', 'Date': 'Thu, 11 Aug 2022 13:28:04 GMT', 'Content-Type': 'application/x-amz-json-1.0', 'Content-Length': '112', 'Connection': 'keep-alive', 'x-amzn-RequestId': '0H8UME85K30CM8C0RKS4A3VCINVV4KQNSO5AEMVJF66Q9ASUAAJG', 'x-amz-crc32': '3737639027'}
+DEBUG:botocore.parsers:Response body:
+b'{"__type":"com.amazonaws.dynamodb.v20120810#ResourceNotFoundException","message":"Requested resource not found"}'
+DEBUG:botocore.parsers:Response headers: {'Server': 'Server', 'Date': 'Thu, 11 Aug 2022 13:28:04 GMT', 'Content-Type': 'application/x-amz-json-1.0', 'Content-Length': '112', 'Connection': 'keep-alive', 'x-amzn-RequestId': '0H8UME85K30CM8C0RKS4A3VCINVV4KQNSO5AEMVJF66Q9ASUAAJG', 'x-amz-crc32': '3737639027'}
+DEBUG:botocore.parsers:Response body:
+b'{"__type":"com.amazonaws.dynamodb.v20120810#ResourceNotFoundException","message":"Requested resource not found"}'
+DEBUG:botocore.hooks:Event needs-retry.dynamodb.GetItem: calling handler <botocore.retryhandler.RetryHandler object at 0x7f43c3018190>
+DEBUG:botocore.retryhandler:No retry needed.
+DEBUG:botocore.hooks:Event after-call.dynamodb.GetItem: calling handler <bound method TransformationInjector.inject_attribute_value_output of <boto3.dynamodb.transform.TransformationInjector object at 0x7f43c301e1f0>>
+ERROR:extract_feature:Exception raised in extract_feature. exception: 
+Traceback (most recent call last):
+  File "/home/minsu/Desktop/projects/summarizer-worker/summarizer/infrastructure/repository/video_repository.py", line 28, in get
+    item = VideoData(**(self.table.get_item(Key={"key": key})["Item"]))
+  File "/home/minsu/anaconda3/envs/summarizer/lib/python3.8/site-packages/boto3/resources/factory.py", line 580, in do_action
+    response = action(self, *args, **kwargs)
+  File "/home/minsu/anaconda3/envs/summarizer/lib/python3.8/site-packages/boto3/resources/action.py", line 88, in __call__
+    response = getattr(parent.meta.client, operation_name)(*args, **params)
+  File "/home/minsu/anaconda3/envs/summarizer/lib/python3.8/site-packages/botocore/client.py", line 508, in _api_call
+    return self._make_api_call(operation_name, kwargs)
+  File "/home/minsu/anaconda3/envs/summarizer/lib/python3.8/site-packages/botocore/client.py", line 911, in _make_api_call
+    raise error_class(parsed_response, operation_name)
+botocore.errorfactory.ResourceNotFoundException: An error occurred (ResourceNotFoundException) when calling the GetItem operation: Requested resource not found
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/minsu/Desktop/projects/summarizer-worker/summarizer/service/command.py", line 31, in extract_feature
+    video_data = video_repo.get(command.key)
+  File "/home/minsu/Desktop/projects/summarizer-worker/summarizer/infrastructure/repository/video_repository.py", line 31, in get
+    raise DatabaseException(f"{self.__class__} get method doesn't work")
+summarizer.exception.DatabaseException: <class 'summarizer.infrastructure.repository.video_repository.VideoDataRepository'> get method doesn't work
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/minsu/Desktop/projects/summarizer-worker/summarizer/log/logger.py", line 37, in wrapper
+    result = func(*args, **kwargs);
+  File "/home/minsu/Desktop/projects/summarizer-worker/summarizer/service/command.py", line 52, in extract_feature
+    raise Exception
+Exception
+DEBUG:botocore.hooks:Changing event name from creating-client-class.iot-data to creating-client-class.iot-data-plane
+DEBUG:botocore.hooks:Changing event name from before-call.apigateway to before-call.api-gateway
+DEBUG:botocore.hooks:Changing event name from request-created.machinelearning.Predict to request-created.machine-learning.Predict
+DEBUG:botocore.hooks:Changing event name from before-parameter-build.autoscaling.CreateLaunchConfiguration to before-parameter-build.auto-scaling.CreateLaunchConfiguration
+DEBUG:botocore.hooks:Changing event name from before-parameter-build.route53 to before-parameter-build.route-53
+DEBUG:botocore.hooks:Changing event name from request-created.cloudsearchdomain.Search to request-created.cloudsearch-domain.Search
+DEBUG:botocore.hooks:Changing event name from docs.*.autoscaling.CreateLaunchConfiguration.complete-section to docs.*.auto-scaling.CreateLaunchConfiguration.complete-section
+DEBUG:botocore.hooks:Changing event name from before-parameter-build.logs.CreateExportTask to before-parameter-build.cloudwatch-logs.CreateExportTask
+DEBUG:botocore.hooks:Changing event name from docs.*.logs.CreateExportTask.complete-section to docs.*.cloudwatch-logs.CreateExportTask.complete-section
+DEBUG:botocore.hooks:Changing event name from before-parameter-build.cloudsearchdomain.Search to before-parameter-build.cloudsearch-domain.Search
+DEBUG:botocore.hooks:Changing event name from docs.*.cloudsearchdomain.Search.complete-section to docs.*.cloudsearch-domain.Search.complete-section
+DEBUG:botocore.loaders:Loading JSON file: /home/minsu/anaconda3/envs/summarizer/lib/python3.8/site-packages/boto3/data/dynamodb/2012-08-10/resources-1.json
+DEBUG:botocore.loaders:Loading JSON file: /home/minsu/anaconda3/envs/summarizer/lib/python3.8/site-packages/botocore/data/endpoints.json
+DEBUG:botocore.loaders:Loading JSON file: /home/minsu/anaconda3/envs/summarizer/lib/python3.8/site-packages/botocore/data/sdk-default-configuration.json
+DEBUG:botocore.hooks:Event choose-service-name: calling handler <function handle_service_name_alias at 0x7fb38b73bdc0>
+DEBUG:botocore.loaders:Loading JSON file: /home/minsu/anaconda3/envs/summarizer/lib/python3.8/site-packages/botocore/data/dynamodb/2012-08-10/service-2.json
+DEBUG:botocore.hooks:Event creating-client-class.dynamodb: calling handler <function add_generate_presigned_url at 0x7fb38b7bfb80>
+DEBUG:botocore.endpoint:Setting dynamodb timeout as (60, 60)
+DEBUG:botocore.loaders:Loading JSON file: /home/minsu/anaconda3/envs/summarizer/lib/python3.8/site-packages/botocore/data/_retry.json
+DEBUG:botocore.client:Registering retry handlers for service: dynamodb
+DEBUG:boto3.resources.factory:Loading dynamodb:dynamodb
+DEBUG:botocore.hooks:Event creating-resource-class.dynamodb.ServiceResource: calling handler <function lazy_call.<locals>._handler at 0x7fb295e663a0>
+DEBUG:boto3.resources.factory:Loading dynamodb:Table
+DEBUG:botocore.hooks:Event creating-resource-class.dynamodb.Table: calling handler <function lazy_call.<locals>._handler at 0x7fb295e66430>
+DEBUG:botocore.hooks:Event creating-resource-class.dynamodb.Table: calling handler <function lazy_call.<locals>._handler at 0x7fb295e663a0>
+DEBUG:boto3.resources.factory:Loading dynamodb:Table
+DEBUG:botocore.hooks:Event creating-resource-class.dynamodb.Table: calling handler <function lazy_call.<locals>._handler at 0x7fb295e66430>
+DEBUG:botocore.hooks:Event creating-resource-class.dynamodb.Table: calling handler <function lazy_call.<locals>._handler at 0x7fb295e663a0>
+DEBUG:botocore.hooks:Event choose-service-name: calling handler <function handle_service_name_alias at 0x7fb38b73bdc0>
+DEBUG:botocore.loaders:Loading JSON file: /home/minsu/anaconda3/envs/summarizer/lib/python3.8/site-packages/botocore/data/s3/2006-03-01/service-2.json
+DEBUG:botocore.hooks:Event creating-client-class.s3: calling handler <function add_generate_presigned_post at 0x7fb38b7bfdc0>
+DEBUG:botocore.hooks:Event creating-client-class.s3: calling handler <function lazy_call.<locals>._handler at 0x7fb295eab3a0>
+DEBUG:botocore.hooks:Event creating-client-class.s3: calling handler <function add_generate_presigned_url at 0x7fb38b7bfb80>
+DEBUG:botocore.endpoint:Setting s3 timeout as (60, 60)
+DEBUG:botocore.client:Registering retry handlers for service: s3
+DEBUG:extract_feature:function extract_feature called with args ExtractFeature(type='ExtractFeature', key='492774aa-d621-454a-8ada-f4e86d6f739d.mp4'), feature_repo=<summarizer.infrastructure.repository.feature_repository.FeatureRepository object at 0x7fb2958987f0>, video_repo=<summarizer.infrastructure.repository.video_repository.VideoDataRepository object at 0x7fb295e8fca0>, s3_repo=<summarizer.infrastructure.repository.s3_repository.S3Repository object at 0x7fb2958af100>
+DEBUG:boto3.resources.action:Calling dynamodb:get_item with {'TableName': 'Video', 'Key': {'key': '492774aa-d621-454a-8ada-f4e86d6f739d.mp4'}}
+DEBUG:botocore.hooks:Event provide-client-params.dynamodb.GetItem: calling handler <function copy_dynamodb_params at 0x7fb2958964c0>
+DEBUG:botocore.hooks:Event before-parameter-build.dynamodb.GetItem: calling handler <bound method TransformationInjector.inject_condition_expressions of <boto3.dynamodb.transform.TransformationInjector object at 0x7fb2958fe1f0>>
+DEBUG:botocore.hooks:Event before-parameter-build.dynamodb.GetItem: calling handler <bound method TransformationInjector.inject_attribute_value_input of <boto3.dynamodb.transform.TransformationInjector object at 0x7fb2958fe1f0>>
+DEBUG:botocore.hooks:Event before-parameter-build.dynamodb.GetItem: calling handler <function generate_idempotent_uuid at 0x7fb38b6d2550>
+DEBUG:botocore.hooks:Event before-parameter-build.dynamodb.GetItem: calling handler <function block_endpoint_discovery_required_operations at 0x7fb38b7bef70>
+DEBUG:botocore.hooks:Event before-call.dynamodb.GetItem: calling handler <function add_recursion_detection_header at 0x7fb38b6d21f0>
+DEBUG:botocore.hooks:Event before-call.dynamodb.GetItem: calling handler <function inject_api_version_header_if_needed at 0x7fb38b6d7dc0>
+DEBUG:botocore.endpoint:Making request for OperationModel(name=GetItem) with params: {'url_path': '/', 'query_string': '', 'method': 'POST', 'headers': {'X-Amz-Target': 'DynamoDB_20120810.GetItem', 'Content-Type': 'application/x-amz-json-1.0', 'User-Agent': 'Boto3/1.23.6 Python/3.8.10 Linux/5.15.0-43-generic Botocore/1.26.6 Resource'}, 'body': b'{"TableName": "Video", "Key": {"key": {"S": "492774aa-d621-454a-8ada-f4e86d6f739d.mp4"}}}', 'url': 'https://dynamodb.ap-northeast-2.amazonaws.com/', 'context': {'client_region': 'ap-northeast-2', 'client_config': <botocore.config.Config object at 0x7fb29593a700>, 'has_streaming_input': False, 'auth_type': None}}
+DEBUG:botocore.hooks:Event request-created.dynamodb.GetItem: calling handler <bound method RequestSigner.handler of <botocore.signers.RequestSigner object at 0x7fb29593a5e0>>
+DEBUG:botocore.hooks:Event choose-signer.dynamodb.GetItem: calling handler <function set_operation_specific_signer at 0x7fb38b6d2430>
+DEBUG:botocore.auth:Calculating signature using v4 auth.
+DEBUG:botocore.auth:CanonicalRequest:
+POST
+/
+
+content-type:application/x-amz-json-1.0
+host:dynamodb.ap-northeast-2.amazonaws.com
+x-amz-date:20220811T133516Z
+x-amz-target:DynamoDB_20120810.GetItem
+
+content-type;host;x-amz-date;x-amz-target
+11cc32177612962bd2b1bc350b90407c595f14bd5ad5c1ff5998c90e89d3b658
+DEBUG:botocore.auth:StringToSign:
+AWS4-HMAC-SHA256
+20220811T133516Z
+20220811/ap-northeast-2/dynamodb/aws4_request
+4cf903ce1f22a65e3c46f23dd7fc0bd850e779c9a3bfaa0a9b82ce8f21637eec
+DEBUG:botocore.auth:Signature:
+09deb99020228cce6cb9174d47b500f0fab1ef56d9fb151b8a096830526e87b9
+DEBUG:botocore.hooks:Event request-created.dynamodb.GetItem: calling handler <function add_retry_headers at 0x7fb38b6d84c0>
+DEBUG:botocore.endpoint:Sending http request: <AWSPreparedRequest stream_output=False, method=POST, url=https://dynamodb.ap-northeast-2.amazonaws.com/, headers={'X-Amz-Target': b'DynamoDB_20120810.GetItem', 'Content-Type': b'application/x-amz-json-1.0', 'User-Agent': b'Boto3/1.23.6 Python/3.8.10 Linux/5.15.0-43-generic Botocore/1.26.6 Resource', 'X-Amz-Date': b'20220811T133516Z', 'Authorization': b'AWS4-HMAC-SHA256 Credential=AKIAXYKMGOSG4IHJJUVD/20220811/ap-northeast-2/dynamodb/aws4_request, SignedHeaders=content-type;host;x-amz-date;x-amz-target, Signature=09deb99020228cce6cb9174d47b500f0fab1ef56d9fb151b8a096830526e87b9', 'amz-sdk-invocation-id': b'cced6010-45b1-4b0b-ba58-9f86eb1450e1', 'amz-sdk-request': b'attempt=1', 'Content-Length': '89'}>
+DEBUG:botocore.httpsession:Certificate path: /home/minsu/anaconda3/envs/summarizer/lib/python3.8/site-packages/certifi/cacert.pem
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): dynamodb.ap-northeast-2.amazonaws.com:443
+DEBUG:urllib3.connectionpool:https://dynamodb.ap-northeast-2.amazonaws.com:443 "POST / HTTP/1.1" 400 112
+DEBUG:botocore.parsers:Response headers: {'Server': 'Server', 'Date': 'Thu, 11 Aug 2022 13:35:16 GMT', 'Content-Type': 'application/x-amz-json-1.0', 'Content-Length': '112', 'Connection': 'keep-alive', 'x-amzn-RequestId': '31JDREH4V6AGUL13I93S1K9HKRVV4KQNSO5AEMVJF66Q9ASUAAJG', 'x-amz-crc32': '3737639027'}
+DEBUG:botocore.parsers:Response body:
+b'{"__type":"com.amazonaws.dynamodb.v20120810#ResourceNotFoundException","message":"Requested resource not found"}'
+DEBUG:botocore.parsers:Response headers: {'Server': 'Server', 'Date': 'Thu, 11 Aug 2022 13:35:16 GMT', 'Content-Type': 'application/x-amz-json-1.0', 'Content-Length': '112', 'Connection': 'keep-alive', 'x-amzn-RequestId': '31JDREH4V6AGUL13I93S1K9HKRVV4KQNSO5AEMVJF66Q9ASUAAJG', 'x-amz-crc32': '3737639027'}
+DEBUG:botocore.parsers:Response body:
+b'{"__type":"com.amazonaws.dynamodb.v20120810#ResourceNotFoundException","message":"Requested resource not found"}'
+DEBUG:botocore.hooks:Event needs-retry.dynamodb.GetItem: calling handler <botocore.retryhandler.RetryHandler object at 0x7fb2958f6190>
+DEBUG:botocore.retryhandler:No retry needed.
+DEBUG:botocore.hooks:Event after-call.dynamodb.GetItem: calling handler <bound method TransformationInjector.inject_attribute_value_output of <boto3.dynamodb.transform.TransformationInjector object at 0x7fb2958fe1f0>>
+ERROR:extract_feature:Exception raised in extract_feature. exception: <class 'summarizer.infrastructure.repository.video_repository.VideoDataRepository'> get method doesn't work
+Traceback (most recent call last):
+  File "/home/minsu/Desktop/projects/summarizer-worker/summarizer/infrastructure/repository/video_repository.py", line 28, in get
+    item = VideoData(**(self.table.get_item(Key={"key": key})["Item"]))
+  File "/home/minsu/anaconda3/envs/summarizer/lib/python3.8/site-packages/boto3/resources/factory.py", line 580, in do_action
+    response = action(self, *args, **kwargs)
+  File "/home/minsu/anaconda3/envs/summarizer/lib/python3.8/site-packages/boto3/resources/action.py", line 88, in __call__
+    response = getattr(parent.meta.client, operation_name)(*args, **params)
+  File "/home/minsu/anaconda3/envs/summarizer/lib/python3.8/site-packages/botocore/client.py", line 508, in _api_call
+    return self._make_api_call(operation_name, kwargs)
+  File "/home/minsu/anaconda3/envs/summarizer/lib/python3.8/site-packages/botocore/client.py", line 911, in _make_api_call
+    raise error_class(parsed_response, operation_name)
+botocore.errorfactory.ResourceNotFoundException: An error occurred (ResourceNotFoundException) when calling the GetItem operation: Requested resource not found
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/minsu/Desktop/projects/summarizer-worker/summarizer/log/logger.py", line 37, in wrapper
+    result = func(*args, **kwargs);
+  File "/home/minsu/Desktop/projects/summarizer-worker/summarizer/service/command.py", line 52, in extract_feature
+    raise e
+  File "/home/minsu/Desktop/projects/summarizer-worker/summarizer/service/command.py", line 31, in extract_feature
+    video_data = video_repo.get(command.key)
+  File "/home/minsu/Desktop/projects/summarizer-worker/summarizer/infrastructure/repository/video_repository.py", line 31, in get
+    raise DatabaseException(f"{self.__class__} get method doesn't work")
+summarizer.exception.DatabaseException: <class 'summarizer.infrastructure.repository.video_repository.VideoDataRepository'> get method doesn't work

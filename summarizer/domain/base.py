@@ -17,6 +17,13 @@ class BaseVideo(BaseModel, ABC):
     def shorten(self, feature: BaseFeature):
         ...
 
+class Repository(ABC):
+    @abstractmethod
+    def put(self, data, ttl=None):
+        ...
+
+    def get(self, entity_key):
+        ...
 
 
 def singleton(class_):
@@ -30,10 +37,3 @@ def singleton(class_):
     return getinstance
 
 
-class Repository(ABC):
-    @abstractmethod
-    def put(self, data, ttl=None):
-        ...
-
-    def get(self, entity_key):
-        ...

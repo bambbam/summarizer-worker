@@ -10,6 +10,7 @@ from summarizer.domain.model.video import Video
 from summarizer.infrastructure.repository import (FeatureRepository,
                                                   VideoDataRepository)
 from summarizer.infrastructure.repository.s3_repository import S3Repository
+from summarizer.log.logger import MyLogger, log
 from summarizer.service.base import Command
 import cv2
 
@@ -19,20 +20,20 @@ class ExtractFeature(Command):
 
 import boto3
 
+@log(MyLogger())
 def extract_feature(
     command: ExtractFeature,
     feature_repo: FeatureRepository,
     video_repo: VideoDataRepository,
     s3_repo: S3Repository,
 ):
-    
+    try:
         video_data = video_repo.get(command.key)
-        if video_data is None:
-            return
         video = Video(
             key=video_data.key,
             url=s3_repo.get_s3_url('video', video_data.key),
         )
+        
         # feature 뽑기
         video_repo.update_status(command.key, 'start')
         video_feature = FaceClustering().extract_feature(video)
@@ -44,12 +45,11 @@ def extract_feature(
                 f"img/{video_data.key}",
                 name
             )
-        ## TODO 잘못짬~~
+            
         result = feature_repo.put(video_feature)
-        if not result:
-            print("error!")
-        # 상태 업데이트
         video_repo.put(video_data)
+    except Exception as e:
+        raise e
         
 
 class ShortenVideo(Command):
@@ -57,33 +57,35 @@ class ShortenVideo(Command):
     key: str
     must_include_feature: List[str]
     
+@log(MyLogger())    
 def shorten_video(
     command: ShortenVideo,
     feature_repo: FeatureRepository,
     video_repo: VideoDataRepository,
     s3_repo: S3Repository,
 ):
-    feature = feature_repo.get(command.key)
-    if feature is None:
-        return
-    video_data = video_repo.get(command.key)
-    video = Video(
-            key=command.key,
-            url=s3_repo.get_s3_url('video', command.key),
+    try:
+        feature = feature_repo.get(command.key)
+        video_data = video_repo.get(command.key)
+        video = Video(
+                key=command.key,
+                url=s3_repo.get_s3_url('video', command.key),
+            )
+        tmp_s3_video_label, s3_video_label = video.shorten(
+            video_feature=feature,
+            must_include_feature=command.must_include_feature
         )
-    tmp_s3_video_label, s3_video_label = video.shorten(
-        video_feature=feature,
-        must_include_feature=command.must_include_feature
-    )
-    s3_repo.upload_video(
-                s3_video_label,
-                f"shorten_video",
-                command.key,
-            )    
-    
-    video_repo.put(video_data, "end")
-    os.remove(tmp_s3_video_label)
-    os.remove(s3_video_label)
+        s3_repo.upload_video(
+                    s3_video_label,
+                    f"shorten_video",
+                    command.key,
+                )    
+        
+        video_repo.put(video_data, "end")
+        os.remove(tmp_s3_video_label)
+        os.remove(s3_video_label)
+    except Exception as e:
+        raise e
 
 COMMAND_HANDLER = {
     "ExtractFeature": (ExtractFeature, extract_feature), 
