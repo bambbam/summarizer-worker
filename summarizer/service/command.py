@@ -1,4 +1,5 @@
 import os
+from sqlite3 import DatabaseError
 from typing import List, Literal
 
 import boto3
@@ -48,7 +49,7 @@ def extract_feature(
             
         result = feature_repo.put(video_feature)
         video_repo.put(video_data)
-    except Exception as e:
+    except DatabaseError as e:
         raise e
         
 
@@ -84,7 +85,7 @@ def shorten_video(
         video_repo.put(video_data, "end")
         os.remove(tmp_s3_video_label)
         os.remove(s3_video_label)
-    except Exception as e:
+    except DatabaseError as e:
         raise e
 
 COMMAND_HANDLER = {
