@@ -1,9 +1,11 @@
 # Capstone Design1 - Video Summarizer Worker
 
-## Stack
+## 다음 레이어의 
 
--   fetching message queue of Redis
--   key-value db(aws dynamodb)
+## 사용 기술
+
+-   메세지 큐에 흘러들어오는 데이터를 입력받습니다.
+-   KeyValue Database를 사용합니다.(dynamodb)
 -   face recognition && face clustering
 
 ## To start
