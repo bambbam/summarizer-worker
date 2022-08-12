@@ -6,9 +6,9 @@
 
 ## 사용 기술
 
--   메세지 큐에 흘러들어오는 데이터를 입력받습니다.
--   KeyValue Database를 사용합니다.(dynamodb)
--   face recognition && face clustering
+-   메세지 큐에 흘러들어오는 데이터를 입력받습니다. - RabbitMQ
+-   KeyValue Database를 사용합니다. - DynamoDB
+-   face recognition && face clustering - DBSCAN, face_recognition
 
 ## To start
 
