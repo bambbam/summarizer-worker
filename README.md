@@ -37,6 +37,8 @@ need .env file
 -   interface : 다른 서비스에서 흘러들어오는 데이터들을 처리해서 서비스 레이어에 내려주는 역할을 담당합니다.
 -   service : 흘러들어온 메세지들을 처리합니다. 이벤트 핸들러 형태로 구현되어, 새로운 메세지를 추가하는데 용이합니다.
 
+![model](./assets/model.png)
+
 ## 처리하는 메세지
 
 1. Extract Feature
