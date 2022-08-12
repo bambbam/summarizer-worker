@@ -3,6 +3,11 @@ import time
 from summarizer.interface import handler
 from summarizer.interface.container import Container
 from summarizer.interface.settings import Settings
+from summarizer.log.logger import MyLogger, log
+
+def callback(ch, method, properties, body):
+    handler.handle_message(body.decode())
+    ch.basic_ack(delivery_tag = method.delivery_tag)
 
 
 class SinkApp:
@@ -13,14 +18,10 @@ class SinkApp:
         self.event_listener = cont.event_listener()
 
     def run(self):
-        while True:
-            self.run_once()
+        self.run_once()
 
+    @log(MyLogger())
     def run_once(self):
-        incoming = self.event_listener.get()
-        print(incoming)
-        if incoming is None:
-            print("no incomming")
-            time.sleep(1)
-            return
-        handler.handle_message(incoming)
+        consume = self.event_listener.get()
+        consume(callback)
+        self.event_listener.rabbit.start_consuming()

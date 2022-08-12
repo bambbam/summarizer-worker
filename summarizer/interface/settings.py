@@ -14,6 +14,10 @@ class Settings(BaseSettings):
     dynamodb_aws_access_key_id: str
     dynamodb_aws_secret_access_key: str
 
+    rabbit_host: str
+    rabbit_port: int
+    rabbit_key: str
+    
     aws_access_key_id: str
     aws_secret_access_key: str
     aws_s3_bucket_name: str
