@@ -1,4 +1,4 @@
-# Capstone Design1 - Video Summarizer Worker
+# Capstone Design1 - Summarizer Worker
 
 ## 다이어그램의 해당 영역을 담당합니다.
 
